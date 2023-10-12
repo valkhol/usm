@@ -1,0 +1,9 @@
+
+.vscode/
+venv/
+_temp/
+__pycache__/
+
+.coverage
+temp*
+

@@ -1,0 +1,23 @@
+{
+    "properties": {
+        "@timestamp": {
+            "type": "date"
+        },
+        "process-time": {
+            "type": "float"
+        },
+        "request": {
+            "type": "keyword"
+        },
+        "request-type": {
+            "type": "keyword",
+            "ignore_above": 8
+        },
+        "response": {
+            "type": "text"
+        },
+        "status": {
+            "type": "long"
+        }
+    }
+}

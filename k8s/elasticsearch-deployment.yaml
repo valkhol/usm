@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: elasticsearch
+  template:
+    metadata:
+      labels:
+        component: elasticsearch
+    spec:
+      # volumes:
+      #   - name: elasticsearch-storage
+      #     persistentVolumeClaim:
+      #       claimName: elastic-persistent-volume-claim
+      containers:
+        - name: elasticsearch
+          image: elasticsearch:8.8.0
+          ports:
+            - containerPort: 9200
+          # volumeMounts:
+          #   - name: elasticsearch-storage
+          #     mountPath: /usr/share/elasticsearch/data
+          #     subPath: elasticsearch
+          env:
+          - name: discovery.type
+            value: 'single-node'
+          - name: ES_JAVA_OPTS
+            value: '-Xms512m -Xmx512m'
+          - name: DISABLE_INSTALL_DEMO_CONFIG
+            value: 'true'
+          - name: DISABLE_SECURITY_PLUGIN
+            value: 'true'
+          - name: xpack.security.enabled
+            value: 'false'

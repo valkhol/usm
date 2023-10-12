@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: api
+  template:
+    metadata:
+      labels:
+        component: api
+    spec:
+      containers:
+        - name: api
+          image: kolesnik705/usm:latest
+          ports:
+            - containerPort: 8110
+          env:
+            - name: REDIS_HOST
+              value: redis-cluster-ip-service
+            - name: MONGO_HOST
+              value: mongo-cluster-ip-service
+            - name: ELASTICSEARCH_HOST
+              value: elasticsearch-cluster-ip-service
